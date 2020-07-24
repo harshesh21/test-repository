@@ -5,6 +5,7 @@ from security import authenticate, identity
 from resources.user import UserRegister
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
+import os
 #resource is a thing our api can return. usually mapped into database tables as well
 #JWT jason web token. encoding data.
 #once request sent and authentication met, we send the jwt to client who then sends jwt after each requests which shows
@@ -12,7 +13,7 @@ from resources.store import Store, StoreList
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL','sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False #when obj changed but no saved to db, this helps, but we turned it off.
 app.secret_key = 'api'
 api = Api(app) #help add resources to our app.
