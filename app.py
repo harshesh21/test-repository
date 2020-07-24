@@ -18,9 +18,6 @@ app.secret_key = 'api'
 api = Api(app) #help add resources to our app.
 
 
-@app.before_first_request #run this before the first request before this app
-def create_tables():
-    db.create_all()  #only creates table it sees.
 
 
 jwt = JWT(app, authenticate, identity) #/auth
